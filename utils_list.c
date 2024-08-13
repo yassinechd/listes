@@ -1,4 +1,6 @@
-#include "liste.h"
+#include "list.h"
+
+
 
 /*initialiser la liste*/
 /**/
@@ -24,16 +26,43 @@ void add_elem(t_list *list, int value)
 {
 	t_elem *new;
 
-	new = malloc(sizeof(*t_elem));
+	new = malloc(sizeof(t_elem));
 	if (!new)
-		return (NULL);
+		return ;
 	new->value = value;
 	new->next = list->head;
 	list->head = new;
 }
 
-
-
-/*supprimer un élément*/
 /*afficher le contenu de la liste*/
-/*supprimer la liste entière*/
+
+void aff_list(t_list *list)
+{
+	if (list == NULL)
+		return ;
+	t_elem *noeud;
+	
+	noeud = list->head;
+
+	while (noeud != NULL)
+	{
+		printf("%p = %d -> %p\n", noeud, noeud->value, noeud->next);
+		noeud = noeud->next;
+	}
+	printf("NULL\n");
+}
+
+/*main pour tester ma liste*/
+
+int main()
+{
+	t_list *list = ft_initialisaion(5);
+
+	add_elem(list, 6);
+	add_elem(list, 7);
+	add_elem(list, 8);
+	add_elem(list, 9);
+	add_elem(list, 10);
+
+	aff_list(list);
+}
